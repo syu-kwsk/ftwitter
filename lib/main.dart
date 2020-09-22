@@ -28,13 +28,6 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -42,20 +35,29 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         title: Text(widget.title),
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              'Hello World',
+      body: ListView(
+        children: List.generate(5, (index) {
+          return InkWell(
+            onTap: () {
+              print("Tapped!");
+            },
+            child: Card(
+              child: Column(
+                children: <Widget>[
+                  Image.asset("assets/picture$index.jpg"),
+                  Container(
+                    margin: EdgeInsets.all(5.0),
+                    child: ListTile(
+                      title: Text("picture$index.jpg"),
+                      leading: Icon(Icons.person),
+                      subtitle: Text("サブタイトル"),
+                    ),
+                  ),
+                ],
+              ),
             ),
-          ],
-        ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: Icon(Icons.edit),
+          );
+        }),
       ),
     );
   }
