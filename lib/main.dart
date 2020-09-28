@@ -39,7 +39,7 @@ class _MyHomePageState extends State<MyHomePage> {
         children: List.generate(5, (index) {
           return InkWell(
             onTap: () {
-              print("Tapped!");
+              Navigator.push(context, MaterialPageRoute(builder: (context) => MyHomePageDetail("assets/picture$index.jpg")));
             },
             child: Card(
               child: Column(
@@ -60,5 +60,41 @@ class _MyHomePageState extends State<MyHomePage> {
         }),
       ),
     );
+  }
+}
+class MyHomePageDetail extends StatefulWidget {
+
+  MyHomePageDetail(this._imageName);
+  final String _imageName;
+
+  @override
+  _MyHomePageDetailState createState() => new _MyHomePageDetailState(_imageName);
+}
+
+class _MyHomePageDetailState extends State<MyHomePageDetail> {
+
+  _MyHomePageDetailState(this._imageName);
+  final String _imageName;
+
+  @override
+  Widget build(BuildContext context) {
+    return new Scaffold(
+        appBar: new AppBar(
+          title: new Text("Material App"),
+        ),
+        body: Center(
+          child: Column(
+            children: <Widget>[
+              Image.asset(_imageName),
+              Container(
+                child: ListTile(
+                  title: Text(_imageName),
+                  leading: Icon(Icons.person),
+                  subtitle: Text("Aは美しい"),
+                ),
+              )
+            ],
+          ),
+        ));
   }
 }
