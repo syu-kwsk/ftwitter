@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'package:ftwitter/tweetForm.dart';
+
 void main() {
   runApp(MyApp());
 }
@@ -35,29 +37,44 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         title: Text(widget.title),
       ),
-      body: ListView(
-        children: List.generate(5, (index) {
-          return InkWell(
-            onTap: () {
-              Navigator.push(context, MaterialPageRoute(builder: (context) => MyHomePageDetail("assets/picture$index.jpg")));
-            },
-            child: Card(
-              child: Column(
-                children: <Widget>[
-                  Image.asset("assets/picture$index.jpg"),
-                  Container(
-                    margin: EdgeInsets.all(5.0),
-                    child: ListTile(
-                      title: Text("picture$index.jpg"),
-                      leading: Icon(Icons.person),
-                      subtitle: Text("サブタイトル"),
+      body: Center(
+        child: ListView(
+          children: List.generate(5, (index) {
+            return InkWell(
+              onTap: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context) => MyHomePageDetail("assets/picture$index.jpg")));
+              },
+              child: Card(
+                child: Column(
+                  children: <Widget>[
+                    Image.asset("assets/picture$index.jpg"),
+                    Container(
+                      margin: EdgeInsets.all(5.0),
+                      child: ListTile(
+                        title: Text("picture$index.jpg"),
+                        leading: Icon(Icons.person),
+                        subtitle: Text("サブタイトル"),
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
+            );
+          }),
+        ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.of(context).push(
+            MaterialPageRoute(
+              builder: (context) {
+                return TweetForm();
+              },
             ),
           );
-        }),
+        },
+        child: Icon(Icons.chat_bubble),
+        backgroundColor: Colors.lightBlueAccent,
       ),
     );
   }
