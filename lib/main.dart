@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'package:ftwitter/tweetForm.dart';
+
 void main() {
   runApp(MyApp());
 }
@@ -63,7 +65,13 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          // Add your onPressed code here!
+          Navigator.of(context).push(
+            MaterialPageRoute(
+              builder: (context) {
+                return TweetForm();
+              },
+            ),
+          );
         },
         child: Icon(Icons.chat_bubble),
         backgroundColor: Colors.lightBlueAccent,
