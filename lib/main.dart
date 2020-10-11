@@ -37,6 +37,42 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         title: Text(widget.title),
       ),
+      drawer: Drawer(
+        child: ListView(
+          children: <Widget>[
+            DrawerHeader(
+              child: Text(
+                'Menu',
+                style: TextStyle(
+                  fontSize: 24,
+                  color: Colors.white,
+                ),
+              ),
+              decoration: BoxDecoration(
+                color: Colors.blue,
+              ),
+            ),
+            ListTile(
+              title: Text('プロフィール'),
+              onTap: () {
+                //移動させたいページ
+              },
+            ),
+            ListTile(
+              title: Text('フォロー'),
+              onTap: () {
+                //移動させたいページ
+              },
+            ),
+            ListTile(
+              title: Text('フォロワー'),
+              onTap: () {
+                //移動させたいページ
+              },
+            ),
+          ],
+        ),
+      ),
       body: Center(
         child: ListView(
           children: List.generate(5, (index) {
