@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ftwitter/fleet_data.dart';
+import 'package:ftwitter/tweet_data.dart';
 
 void main() {
   runApp(MyApp());
@@ -35,7 +36,7 @@ class MyApp extends StatelessWidget {
             Expanded(
               flex: 7,
               child: Container(
-                color: Colors.green,
+                child: TimeLine(),
               ),
             ),
           ],
@@ -103,6 +104,79 @@ class FleetList extends StatelessWidget {
           child: ListView(
             scrollDirection: Axis.horizontal,
             children: fleetList,
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class TimeLine extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return ListView(
+      children: tweetDataList.map((data) {
+        final tweet = TweetCard(data: data);
+        return tweet;
+      }).toList(),
+    );
+  }
+}
+
+class TweetCard extends StatelessWidget {
+  const TweetCard({
+    Key key,
+    this.data,
+  }) : super();
+
+  final TweetData data;
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Container(
+          padding: EdgeInsets.all(5),
+          child: CircleAvatar(
+            backgroundImage: NetworkImage(data.photoUrl),
+            radius: 30,
+          ),
+        ),
+        Expanded(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                data.name,
+                style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              Text(
+                data.content,
+                style: TextStyle(
+                  fontSize: 20,
+                ),
+              ),
+              data.imageUrl != null ? Image.network(data.imageUrl) : Container(),
+              Container(
+                padding: EdgeInsets.all(5),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    Icon(Icons.chat_bubble_outline),
+                    Text(data.reply.toString()),
+                    Icon(Icons.repeat_outlined),
+                    Text(data.reTweet.toString()),
+                    Icon(Icons.favorite_outline),
+                    Text(data.favorite.toString()),
+                    Icon(Icons.share_outlined)
+                  ],
+                ),
+              ),
+            ],
           ),
         ),
       ],
