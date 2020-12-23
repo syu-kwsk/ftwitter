@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'package:ftwitter/tweetForm.dart';
+
 void main() {
   runApp(MyApp());
 }
@@ -28,13 +30,6 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -43,20 +38,80 @@ class _MyHomePageState extends State<MyHomePage> {
         title: Text(widget.title),
       ),
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              'Hello World',
-            ),
-          ],
+        child: ListView(
+          children: List.generate(5, (index) {
+            return InkWell(
+              onTap: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context) => MyHomePageDetail("assets/picture$index.jpg")));
+              },
+              child: Card(
+                child: Column(
+                  children: <Widget>[
+                    Image.asset("assets/picture$index.jpg"),
+                    Container(
+                      margin: EdgeInsets.all(5.0),
+                      child: ListTile(
+                        title: Text("picture$index.jpg"),
+                        leading: Icon(Icons.person),
+                        subtitle: Text("サブタイトル"),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            );
+          }),
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: Icon(Icons.edit),
+        onPressed: () {
+          Navigator.of(context).push(
+            MaterialPageRoute(
+              builder: (context) {
+                return TweetForm();
+              },
+            ),
+          );
+        },
+        child: Icon(Icons.chat_bubble),
+        backgroundColor: Colors.lightBlueAccent,
       ),
     );
+  }
+}
+class MyHomePageDetail extends StatefulWidget {
+
+  MyHomePageDetail(this._imageName);
+  final String _imageName;
+
+  @override
+  _MyHomePageDetailState createState() => new _MyHomePageDetailState(_imageName);
+}
+
+class _MyHomePageDetailState extends State<MyHomePageDetail> {
+
+  _MyHomePageDetailState(this._imageName);
+  final String _imageName;
+
+  @override
+  Widget build(BuildContext context) {
+    return new Scaffold(
+        appBar: new AppBar(
+          title: new Text("Material App"),
+        ),
+        body: Center(
+          child: Column(
+            children: <Widget>[
+              Image.asset(_imageName),
+              Container(
+                child: ListTile(
+                  title: Text(_imageName),
+                  leading: Icon(Icons.person),
+                  subtitle: Text("Aは美しい"),
+                ),
+              )
+            ],
+          ),
+        ));
   }
 }
