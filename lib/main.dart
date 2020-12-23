@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ftwitter/fleet_data.dart';
 
 void main() {
   runApp(MyApp());
@@ -29,9 +30,7 @@ class MyApp extends StatelessWidget {
           children: [
             Expanded(
               flex: 1,
-              child: Container(
-                color: Colors.red,
-              ),
+              child: FleetList(),
             ),
             Expanded(
               flex: 7,
@@ -69,6 +68,44 @@ class MyApp extends StatelessWidget {
           ],
         ),
       ),
+    );
+  }
+}
+
+class FleetList extends StatelessWidget {
+  final List<Widget> fleetList = fleetDataList.map((fleet) {
+    return Container(
+      padding: EdgeInsets.all(3),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          CircleAvatar(
+            radius: 20,
+            backgroundImage: NetworkImage(fleet.photoUrl),
+          ),
+          Text(
+            fleet.name,
+            style: TextStyle(
+              fontSize: 12,
+            ),
+          ),
+        ],
+      ),
+    );
+  }).toList();
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        Expanded(
+          child: ListView(
+            scrollDirection: Axis.horizontal,
+            children: fleetList,
+          ),
+        ),
+      ],
     );
   }
 }
