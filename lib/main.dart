@@ -25,8 +25,21 @@ class MyApp extends StatelessWidget {
           ),
         ),
 
-        body: Container(
-          color: Colors.white,
+        body: Column(
+          children: [
+            Expanded(
+              flex: 1,
+              child: Container(
+                color: Colors.red,
+              ),
+            ),
+            Expanded(
+              flex: 7,
+              child: Container(
+                color: Colors.green,
+              ),
+            ),
+          ],
         ),
         floatingActionButton: FloatingActionButton(
           child: Icon(Icons.add),
