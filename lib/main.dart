@@ -34,7 +34,7 @@ class MyApp extends StatelessWidget {
               child: FleetList(),
             ),
             Expanded(
-              flex: 7,
+              flex: 5,
               child: Container(
                 child: TimeLine(),
               ),
@@ -76,12 +76,12 @@ class MyApp extends StatelessWidget {
 class FleetList extends StatelessWidget {
   final List<Widget> fleetList = fleetDataList.map((fleet) {
     return Container(
-      padding: EdgeInsets.all(3),
+      padding: EdgeInsets.all(5),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           CircleAvatar(
-            radius: 20,
+            radius: 30,
             backgroundImage: NetworkImage(fleet.photoUrl),
           ),
           Text(
@@ -172,7 +172,7 @@ class TweetCard extends StatelessWidget {
                     Text(data.reTweet.toString()),
                     Icon(Icons.favorite_outline),
                     Text(data.favorite.toString()),
-                    Icon(Icons.share_outlined)
+                    Icon(Icons.share_outlined),
                   ],
                 ),
               ),
